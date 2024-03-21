@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">PLAYGROUND</string>
+    <string name="title_home">Home</string>
+    <string name="title_ajustes">Ajustes</string>
+    <string name="title_sonido">Sonido</string>
+    <string name="games_for_kids">GAMES FOR KIDS</string>
+    <string name="scrol_juegos">Juegos</string>
+    <string name="button">ANIMALS</string>
+    <string name="button2">CAT BOUNCE</string>
+    <string name="button3">EMOTIONS</string>
+    <string name="button4">HAPPY COLORS</string>
+    <string name="button5">PIANO</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

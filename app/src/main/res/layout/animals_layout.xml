@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/azul_fondo">
+
+    <TextView
+        android:id="@+id/textViewWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/bobby_jones"
+        android:text="Animals"
+        android:textColor="@color/black"
+        android:textSize="80sp"
+        app:layout_constraintBottom_toTopOf="@+id/viewFlipper"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:foregroundGravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/leon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/leon" />
+
+        <ImageView
+            android:id="@+id/jirafa"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/jirafa" />
+
+        <ImageView
+            android:id="@+id/elefante"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/elefante" />
+
+        <ImageView
+            android:id="@+id/oveja"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/oveja" />
+
+        <ImageView
+            android:id="@+id/tortuga"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/tortuga" />
+
+        <ImageView
+            android:id="@+id/zebra"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/zebra" />
+    </ViewFlipper>
+
+    <Button
+        android:id="@+id/btnCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Check"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewFlipper" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
