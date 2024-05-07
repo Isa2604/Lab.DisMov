@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.playground.Animals;
+import com.example.playground.Piano;
 import com.example.playground.R;
 import com.example.playground.databinding.FragmentHomeBinding;
 
@@ -32,6 +33,7 @@ public class HomeFragment extends Fragment {
         Button button = root.findViewById(R.id.button);
         Button button2 = root.findViewById(R.id.button2);
         Button button3 = root.findViewById(R.id.button3);
+        Button button5 = root.findViewById(R.id.button5);
 
         // Configurar OnClickListener para cada botón
         button.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +57,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Acción a realizar al hacer clic en el tercer botón
+            }
+        });
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Acción a realizar al hacer clic en el tercer botón
+                Intent intent = new Intent(getActivity(), Piano.class);
+                startActivity(intent);
             }
         });
 
