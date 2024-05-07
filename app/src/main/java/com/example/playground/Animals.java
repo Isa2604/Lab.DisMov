@@ -1,5 +1,6 @@
 package com.example.playground;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -24,6 +25,8 @@ public class Animals extends AppCompatActivity {
     private TextView textViewWord;
     private String[] animalWords = {"Leon", "Jirafa", "Elefante", "Oveja", "Tortuga", "Zebra"};
     private HashMap<String, Integer> wordImageMap;
+    private MediaPlayer mediaPlayerCorrecto;
+    private MediaPlayer mediaPlayerIncorrecto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,10 @@ public class Animals extends AppCompatActivity {
             }
         });
 
+        // Inicializar MediaPlayer para reproducir el sonido "correcto"
+        mediaPlayerCorrecto = MediaPlayer.create(this, R.raw.correcto);
+        // Inicializar MediaPlayer para reproducir el sonido "incorrecto"
+        mediaPlayerIncorrecto = MediaPlayer.create(this, R.raw.incorrecto);
     }
 
     private void createWordImageMap() {
