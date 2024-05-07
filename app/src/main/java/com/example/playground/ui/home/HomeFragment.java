@@ -45,6 +45,7 @@ public class HomeFragment extends Fragment {
         // Obtener estado del sonido desde SharedPreferences
         SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         boolean isSoundEnabled = preferences.getBoolean("sound_enabled", true);
+
         // Inicializar el MediaPlayer con la música de fondo si el sonido está habilitado
         if (isSoundEnabled) {
             mediaPlayer = MediaPlayer.create(getActivity(), R.raw.musicafondo);
@@ -67,8 +68,6 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), Animals.class);
                 startActivity(intent);
             }
-
-
         });
 
         button2.setOnClickListener(new View.OnClickListener() {
