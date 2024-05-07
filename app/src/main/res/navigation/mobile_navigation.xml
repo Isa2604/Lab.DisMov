@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.playground.ui.notifications.NotificationsFragment"
+        android:name="com.example.playground.ui.notifications.MusicFragment"
         android:label="@string/title_sonido"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_music" />
 
     <fragment
         android:id="@+id/navigation_home"

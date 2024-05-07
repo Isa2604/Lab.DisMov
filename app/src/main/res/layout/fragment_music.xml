@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/chewy"
+        android:text="Configuracion Musica"
+        android:textColor="@color/black"
+        android:textSize="35sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"/>
+
+    <Switch
+        android:id="@+id/sound_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/chewy"
+        android:minHeight="48dp"
+        android:text="@string/activar_sonido_de_fondo"
+        android:textSize="25sp"
+        android:layout_marginTop="30dp"
+        tools:ignore="UseSwitchCompatOrMaterialXml"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"/>
+
+</LinearLayout>
