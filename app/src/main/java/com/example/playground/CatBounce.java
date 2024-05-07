@@ -16,7 +16,7 @@ public class CatBounce extends AppCompatActivity {
     private ImageView ballImageView;
     private TextView scoreTextView;
     private int score = 0;
-    private float ballSpeedY = 10; // Velocidad vertical inicial de la pelota
+    private float ballSpeedY = 10; // Velocidad vertical de la pelota
     private float ballSpeedX = 0; // Velocidad horizontal de la pelota
     private boolean ballMoving = true; // Indica si la pelota está en movimiento
     private Animation bounceAnimation;
@@ -37,13 +37,10 @@ public class CatBounce extends AppCompatActivity {
             public void onClick(View v) {
                 // Incrementar el contador de aciertos
                 score++;
-                scoreTextView.setText("" + score);
+                scoreTextView.setText(""+score);
 
                 // Realizar un rebote más grande
                 performBounce();
-
-                // Reducir la velocidad de la pelota cada vez que el usuario la toque
-                reduceBallSpeed();
             }
         });
     }
@@ -98,29 +95,20 @@ public class CatBounce extends AppCompatActivity {
     }
 
     private void moveBall() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                // Actualizar la posición vertical de la pelota
-                ballImageView.setY(ballImageView.getY() + ballSpeedY);
-                // Actualizar la posición horizontal de la pelota
-                ballImageView.setX(ballImageView.getX() + ballSpeedX);
+        // Actualizar la posición vertical de la pelota
+        ballImageView.setY(ballImageView.getY() + ballSpeedY);
+        // Actualizar la posición horizontal de la pelota
+        ballImageView.setX(ballImageView.getX() + ballSpeedX);
 
-                // Verificar si la pelota ha alcanzado el límite inferior de la pantalla
-                if (ballImageView.getY() >= getWindow().getDecorView().getHeight() - ballImageView.getHeight()) {
-                    // Detener el movimiento de la pelota
-                    ballMoving = false;
-                    // Mostrar mensaje de fin de juego
-                    Toast.makeText(CatBounce.this, "¡Juego terminado! Puntuación: " + score, Toast.LENGTH_SHORT).show();
-                }
-
-                // Verificar si la pelota ha alcanzado los límites laterales de la pantalla
-                if (ballImageView.getX() <= 0 || ballImageView.getX() >= getWindow().getDecorView().getWidth() - ballImageView.getWidth()) {
-                    // Invertir la dirección horizontal de la pelota para simular el rebote con los límites laterales
-                    ballSpeedX = -ballSpeedX;
-                }
-            }
-        });
+        // Verificar si la pelota ha alcanzado los límites de la pantalla
+        if (ballImageView.getY() <= 0 || ballImageView.getY() >= getWindow().getDecorView().getHeight() - ballImageView.getHeight()) {
+            // Invertir la dirección vertical de la pelota para simular el rebote
+            ballSpeedY = -ballSpeedY;
+        }
+        if (ballImageView.getX() <= 0 || ballImageView.getX() >= getWindow().getDecorView().getWidth() - ballImageView.getWidth()) {
+            // Invertir la dirección horizontal de la pelota para simular el rebote
+            ballSpeedX = -ballSpeedX;
+        }
     }
 
     private void performBounce() {
@@ -130,11 +118,5 @@ public class CatBounce extends AppCompatActivity {
         ballSpeedY *= 1.5f;
         // Cambiar la dirección horizontal de la pelota aleatoriamente
         ballSpeedX = (float) (Math.random() * 20 - 10);
-    }
-
-    private void reduceBallSpeed() {
-        // Reducir la velocidad de la pelota cada vez que el usuario la toque
-        ballSpeedY *= 0.8f;
-        ballSpeedX *= 0.8f;
     }
 }
