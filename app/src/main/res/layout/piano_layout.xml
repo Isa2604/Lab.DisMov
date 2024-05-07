@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    android:gravity="bottom"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Piano App"
+        android:textColor="#FFFFFF"
+        android:textStyle="italic"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginEnd="200dp"
+        android:background="@color/white"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:background="@color/white"
+        android:layout_height="270dp">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:onClick="music"
+            android:background="@drawable/card_bg"
+            app:cardElevation="20dp"
+            android:layout_width="70dp"
+            android:layout_height="250dp"
+            android:layout_marginBottom="20dp">
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:onClick="black"
+            android:layout_width="40dp"
+            android:backgroundTint="@color/black"
+            android:layout_height="130dp"
+            android:layout_marginBottom="70dp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="70dp"
+            app:cardElevation="20dp"
+            android:layout_height="250dp"
+            android:onClick="music2"
+            android:layout_marginBottom="20dp">
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:onClick="black2"
+            android:layout_width="40dp"
+            android:layout_height="130dp"
+            android:layout_marginBottom="70dp"
+            android:backgroundTint="@color/black" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView3"
+            android:layout_width="70dp"
+            app:cardElevation="20dp"
+            android:layout_height="250dp"
+            android:onClick="music3"
+            android:layout_marginBottom="20dp"
+            >
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:onClick="black3"
+            android:layout_width="40dp"
+            android:layout_height="130dp"
+            android:layout_marginBottom="70dp"
+            android:backgroundTint="@color/black" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView4"
+            android:layout_width="70dp"
+            app:cardElevation="20dp"
+            android:layout_height="250dp"
+            android:onClick="music4"
+            android:layout_marginBottom="20dp">
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:onClick="black4"
+            android:layout_width="40dp"
+            android:layout_height="130dp"
+            android:layout_marginBottom="70dp"
+            android:backgroundTint="@color/black" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView5"
+            android:onClick="music5"
+            android:layout_width="70dp"
+            app:cardElevation="20dp"
+            android:layout_height="250dp"
+            android:layout_marginBottom="20dp">
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:onClick="black5"
+            android:layout_width="40dp"
+            android:backgroundTint="@color/black"
+            android:layout_height="130dp"
+            android:layout_marginBottom="70dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView6"
+            android:layout_width="70dp"
+            android:layout_height="250dp"
+            app:cardElevation="20dp"
+            android:onClick="music6"
+            android:layout_marginBottom="20dp"/>
+        <androidx.cardview.widget.CardView
+            android:onClick="black6"
+            android:layout_width="40dp"
+            android:layout_height="130dp"
+            android:layout_marginBottom="70dp"
+            android:backgroundTint="@color/black" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView7"
+            android:layout_width="70dp"
+            app:cardElevation="20dp"
+            android:layout_height="250dp"
+            android:onClick="music7"
+            android:layout_marginBottom="20dp">
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
