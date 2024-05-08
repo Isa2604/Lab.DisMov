@@ -1,10 +1,9 @@
 package com.example.playground;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,107 +15,132 @@ public class CatBounce extends AppCompatActivity {
     private ImageView ballImageView;
     private TextView scoreTextView;
     private int score = 0;
-    private float ballSpeedY = 10; // Velocidad vertical de la pelota
-    private float ballSpeedX = 0; // Velocidad horizontal de la pelota
-    private boolean ballMoving = true; // Indica si la pelota está en movimiento
-    private Animation bounceAnimation;
+    private float ballSpeedY = 0; // Velocidad vertical inicial de la pelota
+    private float ballSpeedX = 0; // Velocidad horizontal inicial de la pelota
+    private boolean ballMoving = false;
+    private Handler handler;
+    private final int INTERVAL = 20; // Intervalo de actualización en milisegundos (20 ms)
+    private final float GRAVITY = 1.0f; // Gravedad aplicada a la pelota
+
+    private final int FLOOR_HEIGHT_OFFSET = 170; // Offset de altura para el suelo
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.catbounce_layout);
 
-        ballImageView = findViewById(R.id.ballImageView);
+        getSupportActionBar().hide();
+
+        ballImageView = findViewById(R.id.ball);
         scoreTextView = findViewById(R.id.scoreTextView);
 
-        // Cargar la animación de rebote
-        bounceAnimation = AnimationUtils.loadAnimation(this, R.anim.bounce_animation);
-
-        ballImageView.setOnClickListener(new View.OnClickListener() {
+        ballImageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                // Incrementar el contador de aciertos
-                score++;
-                scoreTextView.setText(""+score);
-
-                // Realizar un rebote más grande
-                performBounce();
+            public boolean onTouch(View v, MotionEvent event) {
+                if (!ballMoving) {
+                    startBallMovement();
+                    ballMoving = true;
+                }
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    ballSpeedY = -20; // Reiniciar la velocidad vertical cuando el usuario toca la pelota
+                    ballSpeedX = (float) (score * 1.5); // Cambiar la velocidad horizontal aleatoriamente
+                    score++; // Incrementar el contador de aciertos
+                    scoreTextView.setText(String.valueOf(score)); // Actualizar el TextView
+                    ballSpeedY -= score * 0.7; // Aumentar la velocidad vertical con cada toque
+                    return true;
+                }
+                return false;
             }
         });
-    }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            // Iniciar el movimiento de la pelota
-            ballMoving = true;
-            return true;
-        }
-        return super.onTouchEvent(event);
+        handler = new Handler();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        // Iniciar el movimiento de la pelota cuando la actividad se reanuda
-        startBallMovement();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        // Detener el movimiento de la pelota cuando la actividad se pausa
         stopBallMovement();
     }
 
     private void startBallMovement() {
-        // Iniciar el bucle de actualización para mover la pelota
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    if (ballMoving) {
-                        // Actualizar la posición de la pelota
-                        moveBall();
-                    }
-                    try {
-                        Thread.sleep(20); // Intervalo de actualización en milisegundos (por ejemplo, 20 ms)
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
+        handler.postDelayed(ballRunnable, INTERVAL);
     }
 
     private void stopBallMovement() {
-        // Detener el movimiento de la pelota
         ballMoving = false;
+        handler.removeCallbacks(ballRunnable);
     }
+
+    private Runnable ballRunnable = new Runnable() {
+        @Override
+        public void run() {
+            moveBall();
+            if (ballMoving) {
+                handler.postDelayed(this, INTERVAL);
+            }
+        }
+    };
 
     private void moveBall() {
-        // Actualizar la posición vertical de la pelota
-        ballImageView.setY(ballImageView.getY() + ballSpeedY);
-        // Actualizar la posición horizontal de la pelota
-        ballImageView.setX(ballImageView.getX() + ballSpeedX);
+        // Calcular nueva posición de la pelota
+        float newX = ballImageView.getX() + ballSpeedX;
+        float newY = ballImageView.getY() + ballSpeedY;
 
-        // Verificar si la pelota ha alcanzado los límites de la pantalla
-        if (ballImageView.getY() <= 0 || ballImageView.getY() >= getWindow().getDecorView().getHeight() - ballImageView.getHeight()) {
-            // Invertir la dirección vertical de la pelota para simular el rebote
-            ballSpeedY = -ballSpeedY;
+        // Verificar si la pelota ha tocado los bordes horizontales
+        if (newX <= 0 || newX >= getWindow().getDecorView().getWidth() - ballImageView.getWidth()) {
+            ballSpeedX = -ballSpeedX; // Invertir la dirección horizontal
         }
-        if (ballImageView.getX() <= 0 || ballImageView.getX() >= getWindow().getDecorView().getWidth() - ballImageView.getWidth()) {
-            // Invertir la dirección horizontal de la pelota para simular el rebote
-            ballSpeedX = -ballSpeedX;
+
+        // Obtener la posición del "suelo" (altura de la pantalla - offset)
+        int floorPosition = getWindow().getDecorView().getHeight() - FLOOR_HEIGHT_OFFSET;
+
+        // Verificar si la pelota ha tocado el suelo
+        if (newY >= floorPosition - ballImageView.getHeight()) {
+            stopBallMovement(); // Detener el movimiento de la pelota
+            ballImageView.setVisibility(View.INVISIBLE); // Ocultar la pelota
+            showGameOverMessage(); // Mostrar mensaje de juego terminado
+            resetGame(); // Reiniciar el juego
+            return; // Salir del método moveBall()
         }
+
+        // Aplicar gravedad a la velocidad vertical
+        ballSpeedY += GRAVITY;
+
+        // Actualizar la posición de la pelota
+        ballImageView.setX(newX);
+        ballImageView.setY(newY);
     }
 
-    private void performBounce() {
-        // Mostrar la animación de rebote
-        ballImageView.startAnimation(bounceAnimation);
-        // Incrementar la velocidad vertical para un rebote más grande
-        ballSpeedY *= 1.5f;
-        // Cambiar la dirección horizontal de la pelota aleatoriamente
-        ballSpeedX = (float) (Math.random() * 20 - 10);
+    private void showGameOverMessage() {
+        Toast.makeText(this, "Juego terminado. Puntuación: " + score, Toast.LENGTH_LONG).show();
+    }
+
+    private void resetGame() {
+        score = 0;
+        scoreTextView.setText("0");
+
+        // Calcular las coordenadas del centro de la pantalla
+        int screenWidth = getWindow().getDecorView().getWidth();
+        int screenHeight = getWindow().getDecorView().getHeight();
+        int ballWidth = ballImageView.getWidth();
+        int ballHeight = ballImageView.getHeight();
+        float centerX = (screenWidth - ballWidth) / 2f;
+        float centerY = (screenHeight - ballHeight) / 2f;
+
+        // Establecer la posición inicial de la pelota en el centro de la pantalla
+        ballImageView.setX(centerX);
+        ballImageView.setY(centerY);
+
+        ballSpeedX = 0;
+        ballSpeedY = 0;
+        ballMoving = false;
+        ballImageView.setVisibility(View.VISIBLE);
     }
 }
+
+
