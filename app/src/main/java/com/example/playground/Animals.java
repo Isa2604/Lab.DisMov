@@ -1,5 +1,6 @@
 package com.example.playground;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.GestureDetector;
@@ -12,7 +13,6 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.strictmode.SetRetainInstanceUsageViolation;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -61,6 +61,20 @@ public class Animals extends AppCompatActivity {
         mediaPlayerCorrecto = MediaPlayer.create(this, R.raw.correcto);
         // Inicializar MediaPlayer para reproducir el sonido "incorrecto"
         mediaPlayerIncorrecto = MediaPlayer.create(this, R.raw.incorrecto);
+
+        // Obtener referencias a los boton
+        Button button12 = findViewById(R.id.button12);
+
+
+        // Configurar OnClickListener para el button12
+        button12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Crear un Intent para iniciar la actividad MainActivity
+                Intent intent = new Intent(Animals.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void createWordImageMap() {
@@ -146,10 +160,12 @@ public class Animals extends AppCompatActivity {
         if (wordImageMap.containsKey(currentWord) && wordImageMap.get(currentWord) == currentImageId) {
             // La combinación es correcta
             Toast.makeText(Animals.this, "¡Correcto!", Toast.LENGTH_SHORT).show();
+            mediaPlayerCorrecto.start(); // Reproducir el sonido "correcto"
             changeWord(); // Cambiar la palabra solo si la combinación es correcta
         } else {
             // La combinación es incorrecta
             Toast.makeText(Animals.this, "¡Incorrecto!", Toast.LENGTH_SHORT).show();
+            mediaPlayerIncorrecto.start(); // Reproducir el sonido "incorrecto"
         }
     }
     private void changeWord() {
@@ -161,5 +177,17 @@ public class Animals extends AppCompatActivity {
 
     private void checkCombinationAndChangeWord() {
         checkCombination();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Liberar recursos de los MediaPlayers
+        if (mediaPlayerCorrecto != null) {
+            mediaPlayerCorrecto.release();
+        }
+        if (mediaPlayerIncorrecto != null) {
+            mediaPlayerIncorrecto.release();
+        }
     }
 }
