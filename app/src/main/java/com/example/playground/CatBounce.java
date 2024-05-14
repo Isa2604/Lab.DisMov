@@ -1,9 +1,11 @@
 package com.example.playground;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,32 +41,6 @@ public class CatBounce extends AppCompatActivity {
 
 
         getSupportActionBar().hide();
-
-        bottomNavigationView = findViewById(R.id.nav_view);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_notifications:
-                        // Acción para el ítem de notificaciones (sonido)
-                        // Agrega aquí el código que deseas ejecutar cuando se haga clic en el ítem de notificaciones
-                        Toast.makeText(CatBounce.this, "Sonido seleccionado", Toast.LENGTH_SHORT).show();
-                        return true;
-                    case R.id.navigation_home:
-                        // Acción para el ítem de inicio (home)
-                        // Agrega aquí el código que deseas ejecutar cuando se haga clic en el ítem de inicio
-                        Toast.makeText(CatBounce.this, "Inicio seleccionado", Toast.LENGTH_SHORT).show();
-                        return true;
-                    case R.id.navigation_dashboard:
-                        // Acción para el ítem de dashboard (ajustes)
-                        // Agrega aquí el código que deseas ejecutar cuando se haga clic en el ítem de ajustes
-                        Toast.makeText(CatBounce.this, "Ajustes seleccionados", Toast.LENGTH_SHORT).show();
-                        return true;
-                }
-                return false;
-            }
-        });
 
         ballImageView = findViewById(R.id.ball);
         scoreTextView = findViewById(R.id.scoreTextView);
@@ -102,7 +78,22 @@ public class CatBounce extends AppCompatActivity {
             }
         });
 
+
+
         handler = new Handler();
+
+        // Obtener referencias a los boton
+        Button button13 = findViewById(R.id.button13);
+
+        // Configurar OnClickListener para el button13
+        button13.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Crear un Intent para iniciar la actividad MainActivity
+                Intent intent = new Intent(CatBounce.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void updateHighScore() {
