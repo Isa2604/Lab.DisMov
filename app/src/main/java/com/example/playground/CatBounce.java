@@ -1,6 +1,7 @@
 package com.example.playground;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -32,13 +33,16 @@ public class CatBounce extends AppCompatActivity {
     private int highScore = 0; // Variable para almacenar el puntaje máximo
     private TextView highScoreTextView; // Declaración de la variable TextView para el puntaje máximo
     private BottomNavigationView bottomNavigationView;
-
+    private MediaPlayer clickSoundPlayer;
+    private MediaPlayer scoreSoundPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.catbounce_layout);
 
+        clickSoundPlayer = MediaPlayer.create(this, R.raw.click_sound);
+        scoreSoundPlayer = MediaPlayer.create(this, R.raw.score_sound);
 
         getSupportActionBar().hide();
 
@@ -62,16 +66,24 @@ public class CatBounce extends AppCompatActivity {
                     ballMoving = true;
                 }
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    ballSpeedY = -20; // Reiniciar la velocidad vertical cuando el usuario toca la pelota
-                    ballSpeedX = (float) (score * 1.5); // Cambiar la velocidad horizontal aleatoriamente
-                    score++; // Incrementar el contador de aciertos
-                    scoreTextView.setText(String.valueOf(score)); // Actualizar el TextView
-                    ballSpeedY -= score * 0.7; // Aumentar la velocidad vertical con cada toque
+                    ballSpeedY = -20;
+                    ballSpeedX = (float) (score * 1.5);
+                    score++;
+                    scoreTextView.setText(String.valueOf(score));
+                    ballSpeedY -= score * 0.7;
+
+                    // Reproduce el sonido de clic cuando el usuario toca la pelota
+                    clickSoundPlayer.start();
+
+                    if (score % 5 == 0) {
+                        // Reproduce el sonido de puntuación cuando el contador llega a múltiplos de 5
+                        scoreSoundPlayer.start();
+                    }
                     return true;
                 }
                 if (score > highScore) {
-                    highScore = score; // Actualizar el puntaje máximo si el puntaje actual es mayor
-                    updateHighScore(); // Actualizar el TextView del puntaje máximo
+                    highScore = score;
+                    updateHighScore();
                 }
 
                 return false;
@@ -190,6 +202,13 @@ public class CatBounce extends AppCompatActivity {
         ballSpeedY = 0;
         ballMoving = false;
         ballImageView.setVisibility(View.VISIBLE);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Libera los recursos de los MediaPlayer cuando la actividad se destruye
+        clickSoundPlayer.release();
+        scoreSoundPlayer.release();
     }
 }
 

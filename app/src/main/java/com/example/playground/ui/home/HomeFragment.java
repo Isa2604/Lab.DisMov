@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.playground.Animals;
 import com.example.playground.Piano;
 import com.example.playground.R;
+import com.example.playground.Rompecabezas;
 import com.example.playground.databinding.FragmentHomeBinding;
 import com.example.playground.CatBounce;
 
@@ -103,7 +104,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Acción a realizar al hacer clic en el botón
-                //AQUI AGREGAR DANIEL
+                Intent intent = new Intent(getActivity(), Rompecabezas.class);
+                startActivity(intent);
             }
         });
         button7.setOnClickListener(new View.OnClickListener() {

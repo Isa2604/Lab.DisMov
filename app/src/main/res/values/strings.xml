@@ -16,4 +16,8 @@
     <string name="sonido_animals">Sonido Animals</string>
     <string name="configurracion">"¡Bienvenido a nuestra aplicación didáctica para niños!"</string>
     <string name="configurraciona">Esta aplicación ha sido diseñada para que los niños de entre 2 a 5 años disfruten aprendiendo a través de una variedad de juegos interactivos y educativos.</string>
+    <string name="piece1" />
+    <string name="piece2" />
+    <string name="piece3" />
+    <string name="piece4" />
 </resources>
