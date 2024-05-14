@@ -3,10 +3,12 @@ package com.example.playground;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 public class Piano extends AppCompatActivity {
 
@@ -39,7 +41,18 @@ public class Piano extends AppCompatActivity {
         integerSoundBlack5 = soundPool.load(this,R.raw.g_hash,1);
         integerSoundBlack6 = soundPool.load(this,R.raw.c2,1);
 
+        // Obtener referencias a los boton
+        Button button14 = findViewById(R.id.button14);
 
+        // Configurar OnClickListener para el button13
+        button14.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Crear un Intent para iniciar la actividad MainActivity
+                Intent intent = new Intent(Piano.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void music(View view){
