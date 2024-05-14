@@ -35,11 +35,11 @@ public class Piano extends AppCompatActivity {
         integerSoundIDf = soundPool.load(this,R.raw.f,1);
         integerSoundIDg = soundPool.load(this,R.raw.g,1);
         integerSoundIDh = soundPool.load(this,R.raw.h,1);
-        integerSoundBlack = soundPool.load(this,R.raw.a_hash,1);
-        integerSoundBlack2 = soundPool.load(this,R.raw.c_hash,1);
-        integerSoundBlack3 = soundPool.load(this,R.raw.d_hash,1);
-        integerSoundBlack4 = soundPool.load(this,R.raw.f_hash,1);
-        integerSoundBlack5 = soundPool.load(this,R.raw.g_hash,1);
+        integerSoundBlack = soundPool.load(this,R.raw.c_hash,1);
+        integerSoundBlack2 = soundPool.load(this,R.raw.d_hash,1);
+        integerSoundBlack3 = soundPool.load(this,R.raw.g_hash,1);
+        integerSoundBlack4 = soundPool.load(this,R.raw.a_hash,1);
+        integerSoundBlack5 = soundPool.load(this,R.raw.b_hash,1);
         integerSoundBlack6 = soundPool.load(this,R.raw.c2,1);
 
         // Obtener referencias a los boton
