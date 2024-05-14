@@ -122,7 +122,7 @@
             android:layout_marginEnd="25dp"
             android:background="@drawable/btn1"
             android:fontFamily="@font/bobby_jones"
-            android:text="button6"
+            android:text="Puzzle"
             android:textColor="@color/black"
             android:textSize="35sp"
             app:backgroundTint="@null"
