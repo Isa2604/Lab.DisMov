@@ -15,6 +15,9 @@
         <activity android:name=".Animals"/>
         <activity android:name=".CatBounce"/>
         <activity android:name=".Rompecabezas"/>
+        <activity android:name=".NumberDash"/>
+        <activity android:name=".Colorea"/>
+        <activity android:name=".DrawingView"/>
         <activity
             android:name=".Piano"
             android:screenOrientation="landscape"

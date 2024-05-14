@@ -132,26 +132,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button5" />
 
-        <Button
-            android:id="@+id/button7"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="90dp"
-            android:background="@drawable/btn2"
-            android:fontFamily="@font/bobby_jones"
-            android:text="button7"
-            android:textColor="@color/black"
-            android:textSize="35sp"
-            app:backgroundTint="@null"
-            app:cornerRadius="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button6" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

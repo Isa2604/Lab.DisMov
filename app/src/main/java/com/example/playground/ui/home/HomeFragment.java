@@ -16,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.playground.Animals;
+import com.example.playground.Colorea;
+import com.example.playground.NumberDash;
 import com.example.playground.Piano;
 import com.example.playground.R;
 import com.example.playground.Rompecabezas;
@@ -58,7 +60,6 @@ public class HomeFragment extends Fragment {
         Button button4 = root.findViewById(R.id.button4);
         Button button5 = root.findViewById(R.id.button5);
         Button button6 = root.findViewById(R.id.button6);
-        Button button7 = root.findViewById(R.id.button7);
 
         // Configurar OnClickListener para cada botón
         button.setOnClickListener(new View.OnClickListener() {
@@ -81,15 +82,15 @@ public class HomeFragment extends Fragment {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Acción a realizar al hacer clic en el tercer botón
-                //AQUI AGREGAR NUMBER DASH
+                Intent intent = new Intent(getActivity(), NumberDash.class);
+                startActivity(intent);
             }
         });
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Acción a realizar al hacer clic en el botón
-                //AQUI AGREGAR JORGE
+                Intent intent = new Intent(getActivity(), Colorea.class);
+                startActivity(intent);
             }
         });
         button5.setOnClickListener(new View.OnClickListener() {
@@ -108,13 +109,7 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        button7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Acción a realizar al hacer clic en el botón
-                //AQUI AGREGAR DANIEL
-            }
-        });
+
         return root;
     }
 
