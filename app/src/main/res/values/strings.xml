@@ -7,11 +7,13 @@
     <string name="scrol_juegos">Juegos</string>
     <string name="button">ANIMALS</string>
     <string name="button2">CAT BOUNCE</string>
-    <string name="button3">EMOTIONS</string>
+    <string name="button3">NUMBER DASH</string>
     <string name="button4">HAPPY COLORS</string>
     <string name="button5">PIANO</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="activar_sonido_de_fondo">Musica de fondo</string>
     <string name="sonido_animals">Sonido Animals</string>
+    <string name="configurracion">"¡Bienvenido a nuestra aplicación didáctica para niños!"</string>
+    <string name="configurraciona">Esta aplicación ha sido diseñada para que los niños de entre 2 a 5 años disfruten aprendiendo a través de una variedad de juegos interactivos y educativos.</string>
 </resources>
