@@ -15,7 +15,7 @@ public class Piano extends AppCompatActivity {
     MediaPlayer music,music2,music3,music4,music5,music6,music7;
     private SoundPool soundPool;
     private Integer integerSoundIDa,integerSoundIDb,integerSoundIDc,integerSoundIDd,integerSoundIDe,integerSoundIDf,integerSoundIDg,
-            integerSoundBlack,integerSoundBlack2,integerSoundBlack3,integerSoundBlack4,integerSoundBlack5,integerSoundBlack6;
+            integerSoundBlack,integerSoundBlack2,integerSoundBlack3,integerSoundBlack4,integerSoundBlack5,integerSoundBlack6,integerSoundIDh;
     private float floatSpeed = 1.0f;
 
 
@@ -27,13 +27,14 @@ public class Piano extends AppCompatActivity {
 
         SoundPool.Builder builder = new SoundPool.Builder();
         soundPool = builder.build();
-        integerSoundIDa = soundPool.load(this,R.raw.c,1);
-        integerSoundIDb = soundPool.load(this,R.raw.d,1);
-        integerSoundIDc = soundPool.load(this,R.raw.e,1);
-        integerSoundIDd = soundPool.load(this,R.raw.f,1);
-        integerSoundIDe = soundPool.load(this,R.raw.g,1);
-        integerSoundIDf = soundPool.load(this,R.raw.a,1);
-        integerSoundIDg = soundPool.load(this,R.raw.b,1);
+        integerSoundIDa = soundPool.load(this,R.raw.a,1);
+        integerSoundIDb = soundPool.load(this,R.raw.b,1);
+        integerSoundIDc = soundPool.load(this,R.raw.c,1);
+        integerSoundIDd = soundPool.load(this,R.raw.d,1);
+        integerSoundIDe = soundPool.load(this,R.raw.e,1);
+        integerSoundIDf = soundPool.load(this,R.raw.f,1);
+        integerSoundIDg = soundPool.load(this,R.raw.g,1);
+        integerSoundIDh = soundPool.load(this,R.raw.h,1);
         integerSoundBlack = soundPool.load(this,R.raw.a_hash,1);
         integerSoundBlack2 = soundPool.load(this,R.raw.c_hash,1);
         integerSoundBlack3 = soundPool.load(this,R.raw.d_hash,1);
@@ -55,31 +56,33 @@ public class Piano extends AppCompatActivity {
         });
     }
 
-    public void music(View view){
+    public void la(View view){
         soundPool.play(integerSoundIDa,1,1,1,0,floatSpeed);
     }
 
-    public void music2(View view){
+    public void si(View view){
         soundPool.play(integerSoundIDb,1,1,1,0,floatSpeed);
     }
 
-    public void music3(View view){
+    public void ddo(View view){
         soundPool.play(integerSoundIDc,1,1,1,0,floatSpeed);
     }
 
-    public void music4(View view){
+    public void re(View view){
         soundPool.play(integerSoundIDd,1,1,1,0,floatSpeed);
     }
 
-    public void music5(View view){
+    public void mi(View view){
         soundPool.play(integerSoundIDe,1,1,1,0,floatSpeed);
     }
 
-    public void music6(View view){
+    public void fa(View view){
         soundPool.play(integerSoundIDf,1,1,1,0,floatSpeed);
     }
-
-    public void music7(View view){
+    public void dddo(View view){
+        soundPool.play(integerSoundIDh,1,1,1,0,floatSpeed);
+    }
+    public void sol(View view){
         soundPool.play(integerSoundIDg,1,1,1,0,floatSpeed);
     }
 
