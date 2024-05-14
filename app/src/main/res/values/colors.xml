@@ -10,4 +10,6 @@
     <color name="azul_piano">#9BE1FF</color>
     <color name="gray">#7F8081</color>
     <color name="barra_piano">#38B6FF</color>
+    <color name="puzzle">#CDE8E5</color>
+    <color name="puzzleb">#7AB2B2</color>
 </resources>
