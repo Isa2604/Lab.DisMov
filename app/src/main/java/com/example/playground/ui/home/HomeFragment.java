@@ -29,9 +29,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Inicializar el MediaPlayer con la música de fondo
-        mediaPlayer = MediaPlayer.create(getActivity(), R.raw.musicafondo);
-        mediaPlayer.setLooping(true); // Repetir la música en un loop
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
