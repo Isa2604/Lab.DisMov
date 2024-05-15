@@ -1,6 +1,7 @@
 package com.example.playground;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -148,6 +149,19 @@ public class Colorea extends AppCompatActivity {
             public void onClick(View v) {
                 drawingView.setThickness(10); // Restaura el grosor del trazo normal
                 Toast.makeText(Colorea.this, "Normal Stroke", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Obtener referencias a los boton
+        Button button15 = findViewById(R.id.button15);
+
+        // Configurar OnClickListener para el button15
+        button15.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Crear un Intent para iniciar la actividad MainActivity
+                Intent intent = new Intent(Colorea.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }

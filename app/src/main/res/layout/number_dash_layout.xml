@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:background="#AED9E0"
+    android:background="#5F70B6"
     tools:context=".NumberDash">
 
     <!-- GridLayout para mostrar los objetos -->
@@ -17,17 +16,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/bobby_jones"
         android:text="¿Cuantos objetos hay?"
         android:textSize="25sp" />
 
     <GridLayout
         android:id="@+id/objectGridLayout"
-        android:layout_width="594dp"
-        android:layout_height="552dp"
+        android:layout_width="347dp"
+        android:layout_height="419dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="90dp"
         android:layout_marginRight="30dp"
         android:alignmentMode="alignMargins"
         android:columnCount="2"
@@ -54,6 +53,7 @@
             android:layout_marginEnd="10dp"
             android:fontFamily="@font/bobby_jones"
             android:text="1"
+            app:backgroundTint="#FF2742AF"
             android:textSize="30sp" />
 
         <Button
@@ -63,6 +63,7 @@
             android:layout_marginEnd="10dp"
             android:fontFamily="@font/bobby_jones"
             android:text="2"
+            app:backgroundTint="#FF2742AF"
             android:textSize="30sp" />
 
         <Button
@@ -72,6 +73,7 @@
             android:layout_marginEnd="10dp"
             android:fontFamily="@font/bobby_jones"
             android:text="3"
+            app:backgroundTint="#FF2742AF"
             android:textSize="30sp" />
 
         <Button
@@ -80,6 +82,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/bobby_jones"
             android:text="4"
+            app:backgroundTint="#FF2742AF"
             android:textSize="30sp" />
 
     </LinearLayout>
@@ -94,6 +97,27 @@
         android:textColor="@android:color/black"
         android:textStyle="bold"
         android:visibility="gone" />
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="#FF2742AF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button16"
+        android:layout_width="57dp"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:background="@drawable/ic_home"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/view2" />
 
 
 </RelativeLayout>

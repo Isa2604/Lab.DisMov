@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#FFFFFF"
+    android:background="#FE988A"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -52,7 +52,7 @@
     <LinearLayout
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="80dp"
         android:id="@+id/color_buttons_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -128,10 +128,10 @@
     <LinearLayout
         android:id="@+id/extra_buttons_layout"
         android:layout_width="110dp"
-        android:layout_marginTop="490dp"
         android:layout_height="617dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="0dp"
+        android:layout_marginTop="490dp"
+        android:layout_marginEnd="7dp"
         android:gravity="end"
         android:orientation="vertical">
 
@@ -156,4 +156,25 @@
             android:layout_margin="8dp"
             android:background="@drawable/trazo" />
     </LinearLayout>
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="#FA4026"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button15"
+        android:layout_width="57dp"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:background="@drawable/ic_home"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/view2" />
 </RelativeLayout>

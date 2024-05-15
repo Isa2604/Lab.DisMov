@@ -1,6 +1,7 @@
 package com.example.playground;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -84,6 +85,19 @@ public class NumberDash extends AppCompatActivity {
 
         // Generar los objetos y las opciones de conteo al iniciar
         generateObjects();
+
+        // Obtener referencias a los boton
+        Button button13 = findViewById(R.id.button16);
+
+        // Configurar OnClickListener para el button13
+        button13.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Crear un Intent para iniciar la actividad MainActivity
+                Intent intent = new Intent(NumberDash.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void generateObjects() {

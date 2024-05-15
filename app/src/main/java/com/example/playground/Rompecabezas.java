@@ -2,12 +2,14 @@ package com.example.playground;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -48,6 +50,19 @@ public class Rompecabezas extends AppCompatActivity implements View.OnTouchListe
             @Override
             public void onClick(View v) {
                 shufflePieces();
+            }
+        });
+
+        // Obtener referencias a los boton
+        Button button17 = findViewById(R.id.button17);
+
+        // Configurar OnClickListener para el button17
+        button17.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Crear un Intent para iniciar la actividad MainActivity
+                Intent intent = new Intent(Rompecabezas.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
