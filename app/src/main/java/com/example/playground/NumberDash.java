@@ -44,6 +44,7 @@ public class NumberDash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.number_dash_layout);
+        getSupportActionBar().hide();
 
         objectGridLayout = findViewById(R.id.objectGridLayout);
         countButtons = new Button[]{

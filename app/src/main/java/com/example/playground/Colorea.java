@@ -26,7 +26,7 @@ public class Colorea extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.colorea_layout);
-
+        getSupportActionBar().hide();
         // Obtener una referencia al ImageView
         ImageView imageView = findViewById(R.id.image_view);
 
