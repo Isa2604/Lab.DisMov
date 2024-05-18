@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="piece1" type="id" />
+    <item name="piece2" type="id" />
+    <item name="piece3" type="id" />
+    <item name="piece4" type="id" />
+    <item name="shuffleButton" type="id" />
+</resources>

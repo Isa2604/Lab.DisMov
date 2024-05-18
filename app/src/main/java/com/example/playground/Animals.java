@@ -27,6 +27,7 @@ public class Animals extends AppCompatActivity {
     private HashMap<String, Integer> wordImageMap;
     private MediaPlayer mediaPlayerCorrecto;
     private MediaPlayer mediaPlayerIncorrecto;
+    private Toast currentToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,19 +63,36 @@ public class Animals extends AppCompatActivity {
         // Inicializar MediaPlayer para reproducir el sonido "incorrecto"
         mediaPlayerIncorrecto = MediaPlayer.create(this, R.raw.incorrecto);
 
-        // Obtener referencias a los boton
+        // Obtener referencias a los botones
         Button button12 = findViewById(R.id.button12);
-
 
         // Configurar OnClickListener para el button12
         button12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Cancelar cualquier Toast existente antes de iniciar la nueva actividad
+                cancelCurrentToast();
+
+                // Detener la reproducción de los sonidos si están sonando
+                if (mediaPlayerCorrecto != null && mediaPlayerCorrecto.isPlaying()) {
+                    mediaPlayerCorrecto.stop();
+                }
+                if (mediaPlayerIncorrecto != null && mediaPlayerIncorrecto.isPlaying()) {
+                    mediaPlayerIncorrecto.stop();
+                }
+
                 // Crear un Intent para iniciar la actividad MainActivity
                 Intent intent = new Intent(Animals.this, MainActivity.class);
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Cancelar el Toast actual antes de destruir la actividad
+        cancelCurrentToast();
     }
 
     private void createWordImageMap() {
@@ -152,6 +170,7 @@ public class Animals extends AppCompatActivity {
             return false;
         }
     }
+
     private void checkCombination() {
         String currentWord = textViewWord.getText().toString();
         ImageView currentImageView = (ImageView) viewFlipper.getCurrentView();
@@ -159,15 +178,24 @@ public class Animals extends AppCompatActivity {
 
         if (wordImageMap.containsKey(currentWord) && wordImageMap.get(currentWord) == currentImageId) {
             // La combinación es correcta
-            Toast.makeText(Animals.this, "¡Correcto!", Toast.LENGTH_SHORT).show();
+            currentToast = Toast.makeText(Animals.this, "¡Correcto!", Toast.LENGTH_SHORT);
+            currentToast.show();
             mediaPlayerCorrecto.start(); // Reproducir el sonido "correcto"
             changeWord(); // Cambiar la palabra solo si la combinación es correcta
         } else {
             // La combinación es incorrecta
-            Toast.makeText(Animals.this, "¡Incorrecto!", Toast.LENGTH_SHORT).show();
+            currentToast = Toast.makeText(Animals.this, "¡Incorrecto!", Toast.LENGTH_SHORT);
+            currentToast.show();
             mediaPlayerIncorrecto.start(); // Reproducir el sonido "incorrecto"
         }
     }
+
+    private void cancelCurrentToast() {
+        if (currentToast != null) {
+            currentToast.cancel();
+        }
+    }
+
     private void changeWord() {
         Random random = new Random();
         int randomIndex = random.nextInt(animalWords.length);
@@ -177,17 +205,5 @@ public class Animals extends AppCompatActivity {
 
     private void checkCombinationAndChangeWord() {
         checkCombination();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Liberar recursos de los MediaPlayers
-        if (mediaPlayerCorrecto != null) {
-            mediaPlayerCorrecto.release();
-        }
-        if (mediaPlayerIncorrecto != null) {
-            mediaPlayerIncorrecto.release();
-        }
     }
 }

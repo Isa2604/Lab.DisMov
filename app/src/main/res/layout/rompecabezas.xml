@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,6 +7,19 @@
     android:background="@color/cat_bounce"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/puzzleTitle"
+        android:layout_width="match_parent"
+        android:layout_height="169dp"
+        android:layout_above="@+id/puzzleLayout"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="54dp"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/bobby_jones"
+        android:gravity="center"
+        android:text="¿Quién se esconde en el puzzle?"
+        android:textColor="@android:color/white"
+        android:textSize="45dp" />
 
     <RelativeLayout
         android:id="@+id/puzzleLayout"
@@ -23,8 +35,6 @@
             android:layout_height="150dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-
-
             android:contentDescription="@string/piece1"
             android:src="@drawable/piece1" />
 
@@ -57,26 +67,34 @@
 
     </RelativeLayout>
 
-    <Button
+    <ImageButton
         android:id="@+id/shuffleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_below="@id/puzzleLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        app:backgroundTint="@null"
-        android:backgroundTint="@color/catbounce_barra"
-        android:text="Revolver"
-        app:iconTint="#E08989" />
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/catbounce_barra"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="13dp"
+        android:layout_toStartOf="@+id/changeImageButton"
+        android:backgroundTint="@android:color/transparent"
+        android:contentDescription="Shuffle"
+        android:onClick="shufflePieces"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/undo" />
+
+    <ImageButton
+        android:id="@+id/changeImageButton"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_below="@+id/puzzleLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="133dp"
+        android:backgroundTint="@android:color/transparent"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/next"
+        app:tint="@color/image_filter_color" />
 
     <Button
         android:id="@+id/button17"
@@ -89,5 +107,18 @@
         app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/view2" />
+
+    <!-- Nuevo botón para cambiar la imagen del rompecabezas -->
+
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/catbounce_barra"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </RelativeLayout>

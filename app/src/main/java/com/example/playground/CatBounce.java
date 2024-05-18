@@ -10,31 +10,28 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class CatBounce extends AppCompatActivity {
 
     private ImageView ballImageView;
     private TextView scoreTextView;
     private int score = 0;
-    private float ballSpeedY = 0; // Velocidad vertical inicial de la pelota
-    private float ballSpeedX = 0; // Velocidad horizontal inicial de la pelota
+    private float ballSpeedY = 0;
+    private float ballSpeedX = 0;
     private boolean ballMoving = false;
     private Handler handler;
-    private final int INTERVAL = 20; // Intervalo de actualización en milisegundos (20 ms)
-    private final float GRAVITY = 1.0f; // Gravedad aplicada a la pelota
+    private final int INTERVAL = 20;
+    private final float GRAVITY = 1.0f;
 
-    private final int FLOOR_HEIGHT_OFFSET = 170; // Offset de altura para el suelo
-    private int highScore = 0; // Variable para almacenar el puntaje máximo
-    private TextView highScoreTextView; // Declaración de la variable TextView para el puntaje máximo
-    private BottomNavigationView bottomNavigationView;
+    private final int FLOOR_HEIGHT_OFFSET = 170;
+    private int highScore = 0;
+    private TextView highScoreTextView;
     private MediaPlayer clickSoundPlayer;
     private MediaPlayer scoreSoundPlayer;
+
+    private Toast gameOverToast; // Para guardar la referencia del Toast de juego terminado
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +46,8 @@ public class CatBounce extends AppCompatActivity {
         ballImageView = findViewById(R.id.ball);
         scoreTextView = findViewById(R.id.scoreTextView);
 
-
-
-
-        // Dentro de onCreate después de inicializar los elementos de la interfaz de usuario
         highScoreTextView = findViewById(R.id.highScoreTextView);
-        updateHighScore(); // Actualizar el TextView con el puntaje máximo inicial
-
-
+        updateHighScore();
 
         ballImageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -72,11 +63,9 @@ public class CatBounce extends AppCompatActivity {
                     scoreTextView.setText(String.valueOf(score));
                     ballSpeedY -= score * 0.7;
 
-                    // Reproduce el sonido de clic cuando el usuario toca la pelota
                     clickSoundPlayer.start();
 
                     if (score % 5 == 0) {
-                        // Reproduce el sonido de puntuación cuando el contador llega a múltiplos de 5
                         scoreSoundPlayer.start();
                     }
                     return true;
@@ -90,17 +79,19 @@ public class CatBounce extends AppCompatActivity {
             }
         });
 
-
-
         handler = new Handler();
 
-        // Obtener referencias a los boton
         Button button13 = findViewById(R.id.button13);
 
-        // Configurar OnClickListener para el button13
         button13.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Detener el movimiento de la pelota
+                stopBallMovement();
+                // Cancelar el Toast de juego terminado si está mostrándose
+                if (gameOverToast != null) {
+                    gameOverToast.cancel();
+                }
                 // Crear un Intent para iniciar la actividad MainActivity
                 Intent intent = new Intent(CatBounce.this, MainActivity.class);
                 startActivity(intent);
@@ -109,7 +100,7 @@ public class CatBounce extends AppCompatActivity {
     }
 
     private void updateHighScore() {
-        highScoreTextView.setText(""+highScore);
+        highScoreTextView.setText(String.valueOf(highScore));
     }
 
     @Override
@@ -120,7 +111,15 @@ public class CatBounce extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        // Detener el movimiento de la pelota al pausar la actividad
         stopBallMovement();
+        // Liberar los recursos de los MediaPlayer
+        clickSoundPlayer.release();
+        scoreSoundPlayer.release();
+        // Cancelar el Toast de juego terminado si está mostrándose
+        if (gameOverToast != null) {
+            gameOverToast.cancel();
+        }
     }
 
     private void startBallMovement() {
@@ -143,50 +142,44 @@ public class CatBounce extends AppCompatActivity {
     };
 
     private void moveBall() {
-        // Calcular nueva posición de la pelota
         float newX = ballImageView.getX() + ballSpeedX;
         float newY = ballImageView.getY() + ballSpeedY;
-        // Verificar si la pelota ha tocado los bordes horizontales
+
         if (newX <= 0) {
-            newX = 0; // Asegurarse de que la pelota no se salga del borde izquierdo
-            ballSpeedX = -ballSpeedX; // Invertir la dirección horizontal
+            newX = 0;
+            ballSpeedX = -ballSpeedX;
         } else if (newX >= getWindow().getDecorView().getWidth() - ballImageView.getWidth()) {
-            newX = getWindow().getDecorView().getWidth() - ballImageView.getWidth(); // Asegurarse de que la pelota no se salga del borde derecho
-            ballSpeedX = -ballSpeedX; // Invertir la dirección horizontal
+            newX = getWindow().getDecorView().getWidth() - ballImageView.getWidth();
+            ballSpeedX = -ballSpeedX;
         }
 
-        // Obtener la posición del "suelo" (altura de la pantalla - offset)
         int floorPosition = getWindow().getDecorView().getHeight() - FLOOR_HEIGHT_OFFSET;
 
-        // Verificar si la pelota ha tocado el suelo
         if (newY >= floorPosition - ballImageView.getHeight()) {
-            stopBallMovement(); // Detener el movimiento de la pelota
-            ballImageView.setVisibility(View.INVISIBLE); // Ocultar la pelota
-            showGameOverMessage(); // Mostrar mensaje de juego terminado
-            resetGame(); // Reiniciar el juego
-            return; // Salir del método moveBall()
+            stopBallMovement();
+            ballImageView.setVisibility(View.INVISIBLE);
+            showGameOverMessage();
+            resetGame();
+            return;
         }
 
-        // Aplicar gravedad a la velocidad vertical
         ballSpeedY += GRAVITY;
 
-        // Actualizar la posición de la pelota
         ballImageView.setX(newX);
         ballImageView.setY(newY);
 
-        // Agregar rotación a la pelota
-        ballImageView.setRotation(ballImageView.getRotation() + 3); // Cambia el ángulo de rotación gradualmente
+        ballImageView.setRotation(ballImageView.getRotation() + 3);
     }
 
     private void showGameOverMessage() {
-        Toast.makeText(this, "Juego terminado. Puntuación: " + score, Toast.LENGTH_LONG).show();
+        gameOverToast = Toast.makeText(this, "Game Over. Score: " + score, Toast.LENGTH_LONG);
+        gameOverToast.show();
     }
 
     private void resetGame() {
         score = 0;
         scoreTextView.setText("0");
 
-        // Calcular las coordenadas del centro de la pantalla
         int screenWidth = getWindow().getDecorView().getWidth();
         int screenHeight = getWindow().getDecorView().getHeight();
         int ballWidth = ballImageView.getWidth();
@@ -194,7 +187,6 @@ public class CatBounce extends AppCompatActivity {
         float centerX = (screenWidth - ballWidth) / 2f;
         float centerY = (screenHeight - ballHeight) / 2f;
 
-        // Establecer la posición inicial de la pelota en el centro de la pantalla
         ballImageView.setX(centerX);
         ballImageView.setY(centerY);
 
@@ -203,13 +195,7 @@ public class CatBounce extends AppCompatActivity {
         ballMoving = false;
         ballImageView.setVisibility(View.VISIBLE);
     }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Libera los recursos de los MediaPlayer cuando la actividad se destruye
-        clickSoundPlayer.release();
-        scoreSoundPlayer.release();
-    }
 }
+
 
 
