@@ -1,11 +1,16 @@
 package com.example.playground;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,6 +33,7 @@ public class Animals extends AppCompatActivity {
     private MediaPlayer mediaPlayerCorrecto;
     private MediaPlayer mediaPlayerIncorrecto;
     private Toast currentToast;
+    private TextView levelTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,14 +184,12 @@ public class Animals extends AppCompatActivity {
 
         if (wordImageMap.containsKey(currentWord) && wordImageMap.get(currentWord) == currentImageId) {
             // La combinación es correcta
-            currentToast = Toast.makeText(Animals.this, "¡Correcto!", Toast.LENGTH_SHORT);
-            currentToast.show();
             mediaPlayerCorrecto.start(); // Reproducir el sonido "correcto"
+            showAnimation(R.drawable.palomita);// La respuesta es correcta animacion
             changeWord(); // Cambiar la palabra solo si la combinación es correcta
         } else {
             // La combinación es incorrecta
-            currentToast = Toast.makeText(Animals.this, "¡Incorrecto!", Toast.LENGTH_SHORT);
-            currentToast.show();
+            showAnimation(R.drawable.tacha);// La respuesta es incorrecta animacion
             mediaPlayerIncorrecto.start(); // Reproducir el sonido "incorrecto"
         }
     }
@@ -205,5 +209,33 @@ public class Animals extends AppCompatActivity {
 
     private void checkCombinationAndChangeWord() {
         checkCombination();
+    }
+
+    private void showAnimation(int imageResource) {
+        // Crear la vista ImageView para mostrar la animación
+        ImageView animationImageView = new ImageView(this);
+        animationImageView.setImageResource(imageResource);
+
+        // Cargar la animación desde el archivo XML
+        Animation scaleAnimation = AnimationUtils.loadAnimation(this, R.anim.scale_animation);
+
+        // Asignar la animación a la vista ImageView
+        animationImageView.startAnimation(scaleAnimation);
+
+        // Crear un diálogo personalizado con un fondo transparente
+        Dialog dialog = new Dialog(this, R.style.TransparentDialog);
+        dialog.setContentView(animationImageView);
+        dialog.setCancelable(true); // Permitir al usuario cerrar el diálogo tocando fuera de él
+
+        // Configurar un temporizador para cerrar el diálogo después de 1 segundo
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss(); // Cerrar el diálogo después de 1 segundo
+            }
+        }, 2000);
+
+        // Mostrar el diálogo
+        dialog.show();
     }
 }
